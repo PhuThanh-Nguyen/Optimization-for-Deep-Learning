@@ -45,17 +45,17 @@ class VGG16(nn.Module):
         self.in_channels, self.in_width, self.in_height = config.input_size
 
         self.block_1 = VGGBlock(self.in_channels, 64, batch_norm=config.batch_norm)
-        self.block_2 = VGGBlock(64, 128, batch_norm=config.batch_norm)
-        self.block_3 = VGGBlock(128, 256, batch_norm=config.batch_norm)
-        self.block_4 = VGGBlock(256, 512, batch_norm=config.batch_norm)
+        self.block_2 = VGGBlock(64, 128,batch_norm=config.batch_norm)
+        self.block_3 = VGGBlock(128, 256,batch_norm=config.batch_norm)
+        self.block_4 = VGGBlock(256, 512,batch_norm=config.batch_norm)
 
         self.classifier = nn.Sequential(
                 nn.Linear(512, 256),
                 nn.ReLU(True),
-                nn.Dropout(p=0.65),
+                nn.Dropout(p=0.3),
                 nn.Linear(256, 128),
                 nn.ReLU(True),
-                nn.Dropout(p=0.65),
+                nn.Dropout(p=0.1),
                 nn.Linear(128, config.num_classes) 
             )
 
